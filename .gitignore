@@ -1,0 +1,5 @@
+testFile*
+*.a
+*.o
+*.so
+*.exe
