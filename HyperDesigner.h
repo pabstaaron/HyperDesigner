@@ -4,6 +4,11 @@
 #include "HyperStandard.h"
 #include "HyperCompiler.h"
 
+#include "NodeLister.h"
+#include "NodeRenamer.h"
+#include "IOLister.h"
+#include "CouplerUncoupler.h"
+
 using namespace std;
 
 /**
