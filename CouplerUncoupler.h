@@ -17,9 +17,9 @@ public:
     HyperRepeater<bool> couple; // True for couple, false for uncouple
 
     // Outlets
-    HyperRepeater<bool> success; // Transient indicating success
-    HyperRepeater<bool> nodeNotFound; // Transient indicating that a node was not found
-    HyperRepeater<bool> inletNotFound; // Transient indicating that an inlet was not found
+    HyperRepeater<bool> success;        // Transient indicating success
+    HyperRepeater<bool> nodeNotFound;   // Transient indicating that a node was not found
+    HyperRepeater<bool> inletNotFound;  // Transient indicating that an inlet was not found
     HyperRepeater<bool> outletNotFound; // Transient indicating that an outlet was not found
 
     CouplerUncoupler();
@@ -40,14 +40,18 @@ private:
     HyperDetector<HyperNode*> inletsNodeDetector;
     HyperDetector<HyperNode*> outletsNodeDetector;
 
-    HyperDetector<IHyperInlet*> inletDetector;
-    HyperDetector<IHyperOutlet*> outletDetector;
-
     HyperGate<string> inletsNameGate;
     HyperGate<string> outletsNameGate;
 
     InletAccessor inletAccessor;
     OutletAccessor outletAccessor;
+
+    HyperDetector<IHyperInlet*> inletDetector;
+    HyperDetector<IHyperOutlet*> outletDetector;
+    Transitizer tizerC;
+    Transitizer tizerD;
+    HyperGate<IHyperInlet*> inletGate;
+    HyperGate<IHyperOutlet*> outletGate;
 
     SyncDemuxer<IHyperInlet*> inletDemuxer;
     SyncDemuxer<IHyperOutlet*> outletDemuxer;
