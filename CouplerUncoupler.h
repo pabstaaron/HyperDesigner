@@ -3,6 +3,10 @@
 #include "HyperCore.h"
 #include "HyperStandard.h"
 
+#include "CouplerUncouplerNodes/NodeGetAndChecker.h"
+#include "CouplerUncouplerNodes/IOGetAndChecker.h"
+#include "CouplerUncouplerNodes/CoupleButterfly.h"
+
 class CouplerUncoupler : public HyperCircuit {
 public:
     // Inlets
@@ -25,44 +29,7 @@ public:
     CouplerUncoupler();
 
 private:
-    NodeAccessor inletsNodeAccessor;
-    NodeAccessor outletsNodeAccessor;
-
-    HyperDetector<HyperNode*> inletsNodeNameDetector;
-    HyperDetector<HyperNode*> outletsNodeNameDetector;
-
-    // Gates for stopping flow if one of the nodes ot ports is not found
-    HyperGate<HyperNode*> inletsNodeGate;
-    HyperGate<HyperNode*> outletsNodeGate;
-    Transitizer tizerA;
-    Transitizer tizerB;
-
-    HyperDetector<HyperNode*> inletsNodeDetector;
-    HyperDetector<HyperNode*> outletsNodeDetector;
-
-    HyperGate<string> inletsNameGate;
-    HyperGate<string> outletsNameGate;
-
-    InletAccessor inletAccessor;
-    OutletAccessor outletAccessor;
-
-    HyperDetector<IHyperInlet*> inletDetector;
-    HyperDetector<IHyperOutlet*> outletDetector;
-    Transitizer tizerC;
-    Transitizer tizerD;
-    HyperGate<IHyperInlet*> inletGate;
-    HyperGate<IHyperOutlet*> outletGate;
-
-    SyncDemuxer<IHyperInlet*> inletDemuxer;
-    SyncDemuxer<IHyperOutlet*> outletDemuxer;
-
-    Coupler coupler;
-    Uncoupler uncoupler;
-
-    HyperFunnel<bool> successFunnel;
-    HyperFunnel<bool> nodeNotFoundFunnel;
-
-    HyperGate<bool> coupleGateA; // Used to gate the couple signal on a node not being found
-    HyperGate<bool> coupleGateB; // Used to gate the couple signal on an inlet or outlet not being found
-    Reinterpreter<bool, unsigned int> coupleReinterpreter; // Used to convert the couple signal to an unsigned int
+    NodeGetAndChecker nodeGetAndChecker;
+    IOGetAndChecker ioGetAndChecker;
+    CoupleButterfly coupleButterfly;
 };
